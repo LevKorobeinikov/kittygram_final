@@ -15,7 +15,6 @@ services:
     env_file: .env
     volumes:
       - static_volume:/backend_static
-      - static_volume:/backend_static
   frontend:
     image: sofary0/kittygram_frontend
     env_file: .env
