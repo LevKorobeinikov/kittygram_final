@@ -3,6 +3,7 @@ version: '3'
 volumes:
   pg_data_production:
   static_volume:
+  media:
 
 services:
   db:
@@ -13,19 +14,27 @@ services:
   backend:
     image: sofary0/kittygram_backend
     env_file: .env
+    depends_on:
+      - db
     volumes:
       - static_volume:/backend_static
+      - media:/app/media
   frontend:
     image: sofary0/kittygram_frontend
     env_file: .env
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_volume:/frontend_static
+    depends_on:
+      - backend
   gateway:
     image: sofary0/kittygram_gateway  # Качаем с Docker Hub
     env_file: .env
+    depends_on:
+      - frontend
     volumes:
       - static_volume:/staticfiles/
+      - media:/app/media
     ports:
       - 9000:80
 
