@@ -28,17 +28,15 @@ services:
     command: cp -r /app/build/. /frontend_static/
     volumes:
       - static_volume:/frontend_static
-    depends_on:
-      - backend
 
   gateway:
     image: sofary0/kittygram_gateway
     env_file: .env
     depends_on:
-      - frontend
+      - backend
     volumes:
       - static_volume:/static/
-      - media:/app/media
+      - media:/media
     ports:
       - 9000:80
 
