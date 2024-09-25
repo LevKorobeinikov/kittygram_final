@@ -20,7 +20,7 @@ services:
       - db
     volumes:
       - static_volume:/backend_static
-      - media:/app/media
+      - media:/media
 
   frontend:
     image: sofary0/kittygram_frontend
